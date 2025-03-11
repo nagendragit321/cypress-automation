@@ -9,6 +9,10 @@
   "author": "Nagendra CA",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^14.0.3"
+    "cypress": "^14.0.3",
+    "cypress-file-upload": "^5.0.8"
+  },
+  "dependencies": {
+    "cypress-real-events": "^1.14.0"
   }
 }

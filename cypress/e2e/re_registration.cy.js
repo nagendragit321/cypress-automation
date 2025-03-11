@@ -9,12 +9,11 @@ describe('Registration Functionality Error', () => {
         // Check if "Email Address already exist!" message appears
         cy.get('body').then(($body) => {
             if ($body.find('.signup-form > form > p:contains("Email Address already exist!")').length > 0) {
-                cy.log('❌ Email already exists! Stopping test execution.');
-                return; // Stops further execution
+                cy.log('Email already exists! Stopping test execution.');
+                return; 
             } else {
                 // Continue only if email does not exist
                 cy.get('#id_gender1').should('be.visible').check();
-                // Add further form-filling steps here
             }
         });
     });
