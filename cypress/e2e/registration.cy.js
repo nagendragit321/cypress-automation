@@ -3,7 +3,7 @@ describe("Registration Functionality ", () => {
     cy.visit("https://automationexercise.com/");
     cy.get(".shop-menu .nav li:nth-child(4) a").click();
     cy.get('[data-qa="signup-name"]').type("nagendra");
-    cy.get('[data-qa="signup-email"]').type("nagendra8019@gmail.com");
+    cy.get('[data-qa="signup-email"]').type("nagendra80109@gmail.com");
     cy.get('[data-qa="signup-button"]').click();
     cy.get("#id_gender1").check("Mr");
     cy.get('[data-qa="password"]').type("Test@123");
