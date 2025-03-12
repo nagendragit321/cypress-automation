@@ -1,0 +1,45 @@
+name: Cypress CI/CD Pipeline  # Workflow name
+
+on:
+  push:
+    branches:
+      - main  # Run the workflow when code is pushed to the main branch
+  pull_request:
+    branches:
+      - main  # Run the workflow when a pull request is opened on main
+
+jobs:
+  cypress-run:  # Define the job to run Cypress tests
+    runs-on: ubuntu-latest  # Use the latest Ubuntu as the runner environment
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4  # Pulls the latest code from the GitHub repo
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18  # Install Node.js version 18
+
+      - name: Install Dependencies
+        run: npm install  # Install project dependencies (Cypress, etc.)
+
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6  # Run Cypress tests
+        with:
+          browser: chrome  # Use Chrome browser
+          headless: true  # Run tests in headless mode (no UI)
+          config-file: cypress.config.js  # Specify Cypress config file
+
+      - name: Upload Cypress Screenshots (on failure)
+        if: failure()  # Only execute this step if tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots  # Name of the uploaded artifact
+          path: cypress/screenshots  # Location of screenshots for failed tests
+
+      - name: Upload Cypress Videos
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos  # Name of the uploaded artifact
+          path: cypress/videos  # Location of videos for debugging
