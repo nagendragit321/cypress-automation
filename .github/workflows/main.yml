@@ -5,8 +5,10 @@ on:
     branches:
       - main  # Run the workflow when code is pushed to the main branch
   pull_request:
+    types:
+      - opened  # Run only when a new PR is created (not updated)
     branches:
-      - main  # Run the workflow when a pull request is opened on main
+      - main  # Only for PRs targeting main branch
 
 jobs:
   cypress-run:  # Define the job to run Cypress tests
